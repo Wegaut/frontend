@@ -1,0 +1,66 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Schedule Events</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="findUsers()" class="color-find">
+        <p>Find</p>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ -->
+
+ <ion-header>
+  <ion-toolbar color="blank">
+    <ion-buttons slot="end">
+      <ion-button>
+        <img src="../../assets/b2blogo.png"  style="width: 50px;height: 25px;"/>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="main-header4">Chats</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button class="badge-button" routerLink="/fire-signin" routerDirection="forward">
+        <ion-icon name="person-circle-outline" color="light">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+
+  <ion-toolbar color="blank">
+    <ion-grid fixed class="ion-no-padding">
+      <ion-row>
+        <ion-col>
+          <ion-searchbar color="" placeholder="Find chat" (ionChange)="search($event)" search-icon="search-outline">
+          </ion-searchbar>
+        </ion-col>
+      </ion-row>  
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <!--ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher-->
+
+    <ion-row *ngFor="let message of groups | filtro: textSearch">
+      <ion-col>
+            <ion-item>
+              <ion-avatar slot="end">
+                <ion-icon name="trash-bin-outline"size="small" (click)="deleteGroup(message._id)" ></ion-icon></ion-avatar>
+              <ion-label>       
+                <span class="badge badge-light ml-2">
+                  Message Date : {{message.updatedAt | amLocale:'es' | amDateFormat:'LL'}}
+                </span>
+                <h2> <strong> {{message.nameChat}}</strong></h2>
+                <p>{{message.messages}}</p>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+    </ion-row>
+</ion-content>
+
+    

@@ -1,0 +1,178 @@
+<ion-header class="ion-no-border">
+  
+  <ion-toolbar color="blank">
+    <ion-buttons slot="end">
+      <img src="../../assets/b2blogo.png"  style="width: 50px;height: 25px;"/>
+    </ion-buttons>
+    <ion-title class="main-header4">Profile</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="putProfile()" >
+        <ion-icon slot="icon-only" name="cog"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!--   <ion-refresher slot="fixed" style="--ion-text-color: var(--ion-color-medium);" >
+    <ion-refresher-content pullingIcon="arrow-down-outline"></ion-refresher-content>
+  </ion-refresher> -->
+
+  <ion-content>
+    
+  <ion-avatar >
+    <img src="this.photoProfile">
+  </ion-avatar>
+
+ 
+  <ion-card>
+    <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <h3>{{userFollowersNumber}}</h3>
+        <h4>Contacts</h4>
+      </ion-col>
+
+      <ion-col>
+        <h3>{{userEventNumber}}</h3>
+        <h4>Chats</h4>
+      </ion-col>
+
+      <ion-col>
+        <h3>14</h3>
+        <h4>Solicitudes</h4>
+      </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  
+
+  <ion-card>
+    <ion-row>
+          <ion-col>
+                <ion-item>
+                  <ion-label>       
+                  <small>Create: {{ this.updatedAt | amLocale: 'es' | amDateFormat:'LL' }}</small><br>
+                  <br><h2> Name: </h2>
+                  <h2> <strong> {{ this.name }} </strong></h2>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+              <ion-item>
+                <ion-label> 
+                  <h2>Lastname:</h2>
+                  <h2><strong>{{ this.lastname }}</strong></h2>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+              <ion-item>
+                <ion-label>
+                  <h2>Email</h2>
+                  <h2><strong>{{ this.email }}</strong></h2>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+              <ion-item>
+                <ion-label>
+                  <h2>Number Phone </h2>
+                  <h2><strong> {{ this.nPhone }} </strong></h2>
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+        </ion-row>
+  </ion-card>
+
+
+
+  
+<ion-grid fixed>
+  <form (ngSubmit)="putProfile(Pform)" #Pform="ngForm">
+    <ion-row>
+        <ion-col>
+            <ion-list>
+              <ion-item class="roundedInput8px margin-bottom-15 ">
+                <ion-label>
+                  <ion-icon color="medium" name="person"></ion-icon>
+                </ion-label>
+                <ion-input  name="name" 
+                placeholder="Fernando"
+                type="text"
+                [(ngModel)]="user.name"
+                required></ion-input>
+              </ion-item>
+  
+  
+              <ion-item class="roundedInput8px margin-bottom-15 ">
+                <ion-label>
+                  <ion-icon color="medium" name="person"></ion-icon>
+                </ion-label>
+                <ion-input name="lastname"
+                placeholder="Fernandez"
+                type="text"
+                [(ngModel)]="user.lastname"
+                required></ion-input>
+                </ion-item>
+
+                <ion-item class="roundedInput8px margin-bottom-15 ">
+                  <ion-label>
+                    <ion-icon color="medium" name="mail-outline"></ion-icon>
+                  </ion-label>
+                  <ion-input  name="email" 
+                  placeholder="Email@gmail.com"
+                  type="email"
+                  [(ngModel)]="user.email"
+                  required></ion-input>
+                </ion-item>
+
+                <ion-item class="roundedInput8px margin-bottom-15 ">
+                  <ion-label>
+                    <ion-icon color="medium" name="call-outline" ></ion-icon>
+                  </ion-label>
+                  <ion-input  name="nphone" 
+                  placeholder="+58-xxx-xx-xx"
+                  type="number"
+                  [(ngModel)]="user.nPhone"
+                  required></ion-input>
+                </ion-item>
+  
+              </ion-list>
+            </ion-col>
+        </ion-row>
+        
+        <ion-row>
+        <ion-col>
+            <ion-button type="submit"
+                        color="primary"
+                        shape="round">
+                Modificar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    
+    </form>
+  </ion-grid>
+  
+  
+     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+   
+  </ion-content>
+
+  
+
+    
+
+
+  

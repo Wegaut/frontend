@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <img  src="../../assets/logow.JPG" style="width: 30px;height: 30px;"/>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="main-header4">
+    Fav Events
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-buttons slot="primary">
+        <ion-button ion-button icon-only (click)="closeScheduleModal()">
+          <ion-icon  slot="end" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+    </ion-buttons>
+    
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-list>
+  <ion-item-sliding *ngFor="let event of eventFavUser">
+    <ion-item>
+      <ion-card>
+
+        <ion-card-header>
+          <ion-card-title>{{event.title}}</ion-card-title>
+          <ion-card-subtitle>{{event.date}}</ion-card-subtitle>
+        </ion-card-header>
+          <img (click)="getDetailsEvent(event.eventId)" class="image-post" src={{event.eventUrlFile}}/>
+          <ion-item lines="none">
+              <ion-icon 
+                (click)="incrementLike(event)"
+                (click)="likeEvent(event.eventId)"
+              slot="start" name="heart" [style.color]="'#EF3B51'"
+            >
+            </ion-icon>
+            <p>{{event.eventLikes}}</p>
+              <ion-icon (click)="scheduleEvent(event.eventId,event.date)" slot="end" name="calendar"></ion-icon>
+          </ion-item>
+            <ion-card-content>
+             {{event.descrip}}
+            </ion-card-content>
+
+      </ion-card>
+    </ion-item>
+  </ion-item-sliding>
+</ion-list>
+</ion-content>
+

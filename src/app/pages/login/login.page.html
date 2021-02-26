@@ -1,0 +1,230 @@
+<ion-content padding class="background">
+
+  <ion-slides class="mainSlide" #slideMain>
+    
+    <ion-slide>
+
+      <form (ngSubmit)="login(fLogin)" #fLogin="ngForm">
+        <ion-grid fixed>
+
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+              <div class="login-logo">
+                <img src="../../../assets/logoconejoblanco.png">
+              </div>
+            </ion-col>
+          </ion-row>
+        
+          <ion-row>
+            <ion-col>
+              
+                <ion-list>
+                  <ion-item class="roundedInput8px">
+
+                    <ion-label>
+                      <ion-icon color="medium" name="mail-outline"></ion-icon>
+                    </ion-label>
+                    <ion-input name="email"
+                                type="email"
+                                placeholder="Correo Electronico"
+                                [(ngModel)]="user.email"
+                                required></ion-input>
+                  </ion-item>
+
+                  <ion-item class="roundedInput8px">
+                    <ion-label>
+                      <ion-icon color="medium" name="lock-closed-outline"></ion-icon>
+                    </ion-label>
+                    <ion-input 
+                               placeholder="Contraseña" [type]="showPassword ? 'text' : 'password'" clearOnEdit="false"
+                                name="password"
+                                type="password"
+                                [(ngModel)]="user.password"
+                                required>
+                              </ion-input>
+
+                                <!-- ### Show/hide password ### -->
+            <div (click)="onPasswordToggle()" ion-button fill="clear" size="small">
+              <ion-icon slot="icon-only" color="medium" [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+            </div>
+                  </ion-item>
+               
+                  <!-- ############ -->
+         
+                </ion-list>
+
+                <ion-text class="text-color">
+                  <p class="ion-text-right main-header8">Olvidé mi contraseña</p>
+                </ion-text>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-button 
+                          mode="ios" class="ion-margin-top" 
+                          expand="block"
+                          type="submit"
+                          color="white"
+                          shape="round">
+                Login
+              </ion-button>
+            
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </form>
+    
+
+
+    </ion-slide>
+
+    <ion-slide>
+
+      
+      <ion-grid fixed>
+              <ion-row class="ion-justify-content-center">
+                <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+                  <div class="login-logo">
+                    <img src="../../../assets/logoconejoblanco.png">
+                  </div>
+                </ion-col>
+              </ion-row>
+           
+        
+            <form (ngSubmit)="register(fRegister)" #fRegister="ngForm">
+                <ion-row>
+                    <ion-col>
+                        <ion-list>
+                          <ion-item class="roundedInput8px margin-bottom-15 ">
+                            <ion-label>
+                              <ion-icon color="medium" name="mail-outline"></ion-icon>
+                            </ion-label>
+                            <ion-input  name="email" 
+                            placeholder="Correo Electronico"
+                            type="email"
+                            [(ngModel)]="user.email"
+                            required></ion-input>
+                          </ion-item>
+
+
+                          <ion-item class="roundedInput8px margin-bottom-15 ">
+                            <ion-label>
+                              <ion-icon color="medium" name="person"></ion-icon>
+                            </ion-label>
+                            <ion-input name="name"
+                            placeholder="Nombre"
+                            type="text"
+                            [(ngModel)]="user.name"
+                            required></ion-input>
+                            </ion-item>
+
+                          <ion-item class="roundedInput8px margin-bottom-15 ">
+                            <ion-label>
+                              <ion-icon color="medium"  name="person-add"></ion-icon>
+                            </ion-label>
+                            <ion-input name="lastname"
+                            placeholder="Apellido"
+                            type="text"
+                            [(ngModel)]="user.lastname"
+                            required></ion-input>
+                          </ion-item>
+
+                          <ion-item class="roundedInput8px margin-bottom-15 ">
+                            <ion-label>
+                              <ion-icon color="medium"  name="person-add"></ion-icon>
+                            </ion-label>
+                            <ion-input name="nPhone"
+                            placeholder="nPhone"
+                            type="text"
+                            [(ngModel)]="user.nPhone"
+                            required> </ion-input>  
+                          </ion-item>
+
+                          <ion-item class="roundedInput8px margin-bottom-20">
+                            <ion-label>
+                              <ion-icon color="medium" name="lock-closed-outline"></ion-icon>
+                            </ion-label>
+                            <ion-input 
+                                        name="password"
+
+                                        type="password"
+                                        [(ngModel)]="user.password"
+                                        required
+                                        placeholder="Contraseña" 
+                                        [type]="showPassword ? 'text' : 'password'" 
+                                        clearOnEdit="false"
+                                        required></ion-input>
+                                     
+                                      
+        
+                                        <!-- ### Show/hide password ### -->
+                    <div (click)="onPasswordToggle()" ion-button fill="clear" size="small">
+                      <ion-icon slot="icon-only" color="medium" [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+                    </div>
+                          </ion-item>
+
+                    
+
+                        </ion-list>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                <ion-col>
+                    <ion-button type="submit"
+                                color="primary"
+                                shape="round"
+                                >
+                        Crear usuario
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+            
+            </form>
+        </ion-grid>
+  
+  
+      </ion-slide>
+
+
+  </ion-slides>
+
+
+
+</ion-content>
+
+
+<ion-footer >
+  <ion-toolbar>
+    
+    <ion-row>
+      <ion-col>
+          <ion-button shape="round"
+                      expand="full"
+                      size="small"
+                      fill="outline"
+                      color="blue"
+                      (click)="showRegister()">
+            Ingresar
+          </ion-button>
+      </ion-col>
+
+      <ion-col>
+        <ion-button shape="round"
+                    expand="full"
+                    size="small"
+                    fill="outline"
+                    color="violet"
+                    (click)="showLogin()">
+          Registrarme
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+
+
+
+  </ion-toolbar>
+</ion-footer>

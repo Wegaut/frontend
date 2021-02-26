@@ -1,0 +1,139 @@
+ <ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title slot="start" class="main-header4" color="secondary">TeamSpaces</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button  (click)="addGroup(postGroup)" color="secondary">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+   
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+<ion-toolbar color="blank">
+  <ion-grid fixed class="ion-no-padding">
+    <ion-row>
+      <ion-col>
+        <ion-searchbar color="" animated placeholder="Find group" search-icon="search-outline"  debounce="2" (ionChange)="buscar($event)" >
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>  
+  </ion-grid>
+</ion-toolbar>
+
+
+<ion-card  *ngFor="let group of this.groups | filtro: textBuscar">
+  <ion-item>
+    <ion-label>
+      <h2>Grupos</h2>
+      <span class="badge badge-light ml-2">
+        {{group.updatedAt | amLocale:'es' | amDateFormat:'LL'}}
+      </span>
+      <h2> <strong> {{group.nameChat }}</strong></h2>
+      <span class="badge badge-primary ml-2">
+        {{group.user.email}}
+      </span>
+    </ion-label>
+  </ion-item>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col>
+
+    </ion-col>
+  </ion-row>
+ 
+</ion-card> 
+
+
+<!--ion-grid class="ion-no-padding">
+  <ion-row>
+    <ion-col class="ion-no-padding">
+      <ion-card>
+        <ion-card-title horizontal="center" slot="fixed">New Group</ion-card-title>
+        <ion-card-content>
+          <ion-input type="text" placeholder="Name Chat: Reunion " #nameChat></ion-input> 
+          <ion-input type="text" placeholder="Introduce el Email" #email></ion-input>
+          <ion-button color="dark" type="submit" expand="block" (click)="addGroup(nameChat,email)">Create Group  </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid-->
+
+
+<ion-grid fixed>
+<form (ngSubmit)="addGroup(fAddGroup)" #fAddGroup="ngForm">
+  <ion-row>
+      <ion-col>
+          <ion-list>
+            <ion-item class="roundedInput8px margin-bottom-15 ">
+              <ion-label>
+                <ion-icon color="medium" name="mail-outline"></ion-icon>
+              </ion-label>
+              <ion-input  name="nameChat" 
+              placeholder="Nombre del Grupo"
+              type="text"
+              [(ngModel)]="group.nameChat"
+              required></ion-input>
+            </ion-item>
+
+
+            <ion-item class="roundedInput8px margin-bottom-15 ">
+              <ion-label>
+                <ion-icon color="medium" name="person"></ion-icon>
+              </ion-label>
+              <ion-input name="email"
+              placeholder="Email del Contacto"
+              type="text"
+              [(ngModel)]="group.email"
+              required></ion-input>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
+      </ion-row>
+      
+      <ion-row>
+      <ion-col>
+          <ion-button type="submit"
+                      color="primary"
+                      shape="round"
+                      >
+              Crear Grupo
+          </ion-button>
+      </ion-col>
+  </ion-row>
+  
+  </form>
+</ion-grid>
+
+
+
+    <ion-list>
+      <!-- Refresher -->
+      <ion-item *ngFor="let group of groups" (click)="openChat(chat)">
+        <ion-avatar slot="start">
+        </ion-avatar>
+        <ion-label>
+    
+        </ion-label>
+      </ion-item>
+    
+  </ion-list>
+
+   
+
+          <!-- Infinite Scroll -->
+          <ion-infinite-scroll
+          threshold="150px"
+          (ionInfinite)="nextEvents($event)">
+        <ion-infinite-scroll-content>
+        </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+</ion-content>
+
+
+

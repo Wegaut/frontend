@@ -1,0 +1,50 @@
+
+
+.mainSlide, .mainSlide ion-slide {
+    width: 100%;
+    height: 100%;
+}
+
+img {
+    width: 120px;
+}
+
+.pick-avatar {
+    width: 80px;
+    opacity: 0.3;
+}
+
+.pick-avatar-seleccionado {
+    transition: opacity 0.5s linear;
+    opacity: 1 !important;
+}
+
+.login-logo {
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .login-logo img {
+    max-width: 100px;
+  }
+  
+  ion-content.background{
+    --background: url(../../../assets/backgrounimg.png) 0 0/100% 100% no-repeat;
+
+  
+}
+
+.background-image{
+    --background: url(../../../assets/backgrounimg.png) 0 0/100% 100% no-repeat;
+}
+
+.text-color {
+    color: white;
+}
+.myColor {
+    background-color: blue;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }

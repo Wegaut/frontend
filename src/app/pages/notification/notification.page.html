@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar color="blank">
+    <ion-buttons slot="end">
+      <ion-button>
+        <img src="../../assets/b2blogo.png" style="width: 50px;height: 25px;"/>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="main-header4">Contacts</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button class="badge-button" routerLink="/fire-signin" routerDirection="forward">
+        <ion-icon name="person-circle-outline" color="light">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+
+    <ion-buttons slot="end">
+      <ion-buttons slot="primary">
+        <ion-button ion-button icon-only (click)="addContact()">
+          <ion-icon  slot="end" name="person-add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar color="blank">
+    <ion-grid fixed class="ion-no-padding">
+      <ion-row>
+        <ion-col>
+          <ion-searchbar color="" placeholder="Find contact"  (click)="findUsers()" search-icon="search-outline">
+          </ion-searchbar>
+        </ion-col>
+      </ion-row>  
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+    <ion-content padding>
+      <ion-card  *ngFor="let contacts of this.user">
+        <ion-item>
+          <ion-label>
+           
+            <span class="badge badge-light ml-2">
+            {{contacts.updatedAt  | amLocale: 'es' | amDateFormat:'LL'}} 
+          </span>
+
+          <p> Contacto-Email</p>
+          
+            <span class="badge badge-light ml-2">
+               <h2> <strong> {{contacts.email}}</strong></h2> </span>
+          </ion-label>
+        </ion-item>       
+      </ion-card>
+
+
+      <ion-grid fixed>
+        <form (ngSubmit)="addContact(fAddContact)" #fAddContact="ngForm">
+          <ion-row>
+              <ion-col>
+                  <ion-list>
+                    <ion-item class="roundedInput8px margin-bottom-15 ">
+                      <ion-label>
+                        <ion-icon color="medium" name="person"></ion-icon>
+                      </ion-label>
+                      <ion-input name="email"
+                      placeholder="Email del Contacto"
+                      type="text"
+                      [(ngModel)]=email
+                      required></ion-input>
+                      </ion-item>
+        
+                    </ion-list>
+                  </ion-col>
+              </ion-row>
+              
+              <ion-row>
+              <ion-col>
+                  <ion-button type="submit"
+                              color="primary"
+                              shape="round"
+                              >
+                      Crear Grupo
+                  </ion-button>
+              </ion-col>
+          </ion-row>
+          
+          </form>
+        </ion-grid>
+        
+  </ion-content>
+
+  
+    <!--ion-content  class="ion-padding">
+      <ion-list>
+        
+          <ion-item *ngFor="let user of this.user">
+            <ion-avatar slot="start">
+              <ion-img [src]="user.photoProfile"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <-h2> <b> {{user.name}} && {{user.lastname}}</b></h2>
+              <h3>{{user.contacts.email}}</h3>
+              <p>acceder dando click</p>
+            </ion-label>
+          </ion-item>
+        
+      </ion-list>
+    </ion-content-->
+    
+  
+  
+</ion-content>
