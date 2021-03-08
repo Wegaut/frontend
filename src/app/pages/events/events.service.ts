@@ -21,9 +21,7 @@ export class EventsService {
 
   urlEndpointb2b = 'https://wegautb2b.herokuapp.com/api/';
   constructor(private http: HttpClient,fileTransfer: FileTransfer
-              ) { 
-                this.search="prueba"
-              }
+              ) {  }
            
   postGroup(token,group):Observable<any> {
   let params =JSON.stringify(group);
@@ -62,6 +60,13 @@ export class EventsService {
                                    .set('Authorization', token);
    return this.http.delete(this.urlEndpointb2b+'DELETE_GROUP/'+id, {headers:headers});
   }
+
+  getGroupHome(id,token):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+                                    .set('Authorization', token);
+    return this.http.get(this.urlEndpointb2b+'GET_GROUP/'+id, {headers:headers});
+  }
+
  
 
 

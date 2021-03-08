@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>modal-notification-detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid fixed>
+    <form #fAddContact="ngForm" (ngSubmit)="addContact(fAddContact)" >
+      <ion-row>
+          <ion-col>
+              <ion-list>
+                <ion-item class="roundedInput8px margin-bottom-15 ">
+                  <ion-label>
+                    <ion-icon color="medium" name="person"></ion-icon>
+                  </ion-label>
+                  <ion-input name="email"
+                  placeholder="Email del Contacto"
+                  type="text" 
+                  #contacts.email="ngModel"
+                  [(ngModel)]="contacts.email"
+                  required></ion-input>
+                  </ion-item>
+    
+                </ion-list>
+              </ion-col>
+          </ion-row>
+          
+          <ion-row>
+          <ion-col>
+              <ion-button type="submit"
+                          color="primary"
+                          shape="round"
+                          >
+                  Crear Grupo
+              </ion-button>
+          </ion-col>
+      </ion-row>
+      
+      </form>
+    </ion-grid>
+</ion-content>

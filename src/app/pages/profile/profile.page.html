@@ -20,12 +20,12 @@
 
   <ion-content>
     
-  <ion-avatar >
-    <img src="this.photoProfile">
+  <ion-avatar class="mr-4 float-left" *ngIf="this.photoProfile">
+    <img src="{{url+'photoProfile/'+user.photoProfile}}" class="avatar_nav"/>
   </ion-avatar>
 
  
-  <ion-card>
+  <!--ion-card>
     <ion-card-content>
     <ion-row>
       <ion-col>
@@ -44,7 +44,7 @@
       </ion-col>
       </ion-row>
     </ion-card-content>
-  </ion-card>
+  </ion-card-->
 
   
 

@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { NotificationService } from '../notification/notification.service';
 import { LoginService } from '../login/login.service';
 import { UserSchema } from 'src/app/models/user-model';
+import {global} from '../../global.service';
 
 
 
@@ -12,12 +13,13 @@ import { UserSchema } from 'src/app/models/user-model';
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
+  providers:[LoginService, ProfileService]
 })
 export class ProfilePage implements OnInit {
 
 
  
-  public user : Array <UserSchema>;
+  public user :UserSchema;
   public identity 
   public token;
   public status:string;
@@ -28,6 +30,7 @@ export class ProfilePage implements OnInit {
   public nPhone;
   public photoProfile;
   public AfuConfig;
+  public url;
 
 
   constructor(
@@ -41,6 +44,8 @@ export class ProfilePage implements OnInit {
 
 this.identity=this.loginservice.getIdentity();
 this.token=this.loginservice.getToken();
+this.user= new UserSchema();
+this.url=global.url;
                 }
 
   ngOnInit() {
@@ -62,7 +67,7 @@ this.token=this.loginservice.getToken();
           this.email=response.user.email;
           this.nPhone=response.user.nPhone;
           this.photoProfile=response.user.photoProfile;
-          console.log(response.user);
+          console.log(this.photoProfile);
         }
       },
       error => {

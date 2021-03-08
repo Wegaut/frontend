@@ -27,7 +27,12 @@ const routes: Routes = [
   {
     path: 'modal-photo-event',
     loadChildren: () => import('./modal-photo-event/modal-photo-event.module').then( m => m.ModalPhotoEventPageModule)
+  },
+  {
+    path: 'modal-events-detail',
+    loadChildren: () => import('./modal-events-detail/modal-events-detail.module').then( m => m.ModalEventsDetailPageModule)
   }
+
 ];
 
 @NgModule({

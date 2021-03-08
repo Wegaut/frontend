@@ -8,10 +8,9 @@ import { HomeService } from './home.service';
 import { LoginService } from '../login/login.service';
 import {GroupsSchema} from '../../models/group';
 import { UserSchema } from 'src/app/models/user-model';
-import { ModalFollowUsersPage } from './modal-follow-users/modal-follow-users.page';
-import { ModalDetailsEventPage } from '../events/modal-details-event/modal-details-event.page';
 import { ModalChatPage } from '../profile/modal-chat/modal-chat.page';
 import {AlertController} from '@ionic/angular';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 
 @Component({
@@ -29,8 +28,10 @@ export class HomePage {
   public identity;
   public token;
   public status;
-  public groups: Array <GroupsSchema>;
+  public groups: GroupsSchema;
   public textSearch="";
+  public messages;
+
 
   constructor(private eventService: EventsService,
               private storage: Storage,
@@ -38,7 +39,10 @@ export class HomePage {
               private modalCrtl: ModalController,
               private homeService: HomeService,
               private loginservice:LoginService,
-              private alertController : AlertController) 
+              private alertController : AlertController,
+              private _router :Router,
+              private _route :ActivatedRoute
+              ) 
               {
 this.identity=this.loginservice.getIdentity();
 this.token=this.loginservice.getToken();
@@ -71,7 +75,6 @@ this.token=this.loginservice.getToken();
       response=>{
         if(response.group){
           this.groups = response.group;
-          console.log(response.group);
         }
       },
       error => {
@@ -79,6 +82,35 @@ this.token=this.loginservice.getToken();
       }
     )
   }
+
+  getGroup(){
+    this._route.params.subscribe(params =>{
+      let id = params['id'];
+
+      this.homeService.getGroupHome(id,this.token).subscribe(
+        response =>{
+          if(response.group){
+            this.groups=response.group; 
+           // for ( const messageDetails in this.group.messages) { console.log(messageDetails)}; 
+          /*
+          this.group.messages.forEach(obj => {
+            Object.entries(obj).forEach(([key, value]) => {
+                console.log(`${key} ${value}`);
+                //this.rescueMsg.push(); 
+            });
+            console.log('-------------------');
+          });
+*/
+          }else{
+            this._router.navigate(['/main/tabs/home']);
+          }
+        },
+        error =>{
+          console.log(error);
+        }
+      );
+  });
+}
 
   getChatSearch(){
     // var groupId = this.identity._id;
@@ -107,7 +139,7 @@ this.token=this.loginservice.getToken();
       {
       text:'Delete',
       handler: () =>{
-        this.eventService.deleteGroup(id,this.token,).subscribe(
+        this.eventService.deleteGroup(id,this.token).subscribe(
           response=>{
             console.log(response);
             this.getGroupUser();

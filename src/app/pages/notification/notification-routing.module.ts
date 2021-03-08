@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: NotificationPage
+  },
+  {
+    path: 'modal-notification-detail/:id',
+    loadChildren: () => import('./modal-notification-detail/modal-notification-detail.module').then( m => m.ModalNotificationDetailPageModule)
   }
+
 ];
 
 @NgModule({

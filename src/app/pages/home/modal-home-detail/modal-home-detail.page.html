@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title  class="mt-3 col-lg-12 ml-5" *ngIf="group"> {{group.nameChat}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <ion-row >
+  <ion-col>
+        <ion-item>
+          <ion-avatar slot="end">
+            <ion-icon name="trash-bin-outline"size="small" (click)="deleteGroup(message._id)" ></ion-icon>
+          </ion-avatar>
+            <ion-label>      
+
+            <ion-badge color="light" class="ml-2">
+               <p><strong>Message Date: {{message.updatedAt | amLocale:'es' | amDateFormat:'LL'}}</strong></p>
+            </ion-badge>
+            <br>
+
+            <ion-badge color="tertiary" class="ml-2">
+              <p><strong>{{this.identity.name + ' ' + this.identity.lastname}}</strong></p>
+           </ion-badge>
+
+           </ion-label>
+        </ion-item>
+      </ion-col>
+</ion-row>
+
+<ion-row >
+<ion-col class="d-flex flex-column">
+  <ion-list class="justify-content-end" *ngFor="let message of this.group.messages">
+    <p class="col-6 msg right comment-item">{{message.messageContent}}
+  
+    </p>
+  </ion-list>
+</ion-col>
+</ion-row>
+
+<ion-grid fixed>
+  <form  #HAddMessage="ngForm" (ngSubmit)="addMesssage(HAddMessage)" >
+    <ion-row>
+        <ion-col>
+            <ion-list>
+              <ion-item class="roundedInput8px margin-bottom-15 ">
+                <ion-label>
+                  <ion-icon color="medium" name="mail-outline"></ion-icon>
+                </ion-label>
+                <ion-textarea
+                 name="messageContent" 
+                placeholder="Escribir mensaje"
+                type="text"
+                #messages.messageContent="ngModel"
+                [(ngModel)]="message.messageContent"
+                required></ion-textarea>
+              </ion-item>
+
+
+              <ion-item class="roundedInput8px margin-bottom-15 ">
+                <ion-label>
+                  <ion-icon color="medium" name="person"></ion-icon>
+                </ion-label>
+                <ion-input name="idStatusMessage"
+                default="false"
+                type="text"
+                #message.idStatusMessage="ngModel"
+                [(ngModel)]="message.idStatusMessage"
+                required></ion-input>
+                </ion-item>
+
+              </ion-list>
+            <ion-button type="submit"
+                        color="primary"
+                        shape="round"
+                        >
+                Enviar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    
+    </form>
+  </ion-grid>
+
+
+
+ 
+</ion-content>
+ 

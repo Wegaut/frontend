@@ -30,7 +30,7 @@ export class EventsPage implements OnInit {
   public token;
   public status;
   public search;
-  public groups: Array <GroupsSchema>
+  public groups: GroupsSchema;
   public group;
   public textBuscar="";
 
@@ -43,7 +43,7 @@ export class EventsPage implements OnInit {
 
 this.identity=this.loginservice.getIdentity();
 this.token=this.loginservice.getToken();
-this.group = new GroupsSchema("","",)
+this.group = new GroupsSchema("","","","","")
               }
 
             
@@ -57,27 +57,6 @@ this.group = new GroupsSchema("","",)
    this.getGroupAll();
   //this.getGroupSearch();
   }
-
-
-
-  addGroup(fAddGroup){
-    this.eventService.postGroup(this.token,this.group).subscribe(
-      response=>{
-        console.log(response);
-        if(response.group){
-          this.status="success";
-          this.group=response.group;
-        }else{
-          this.status="error";
-        }
-      },
-      error=>{
-        this.status="error";
-        console.log(error);
-      }
-    )
-  }
-
  
 
   getGroupAll(){

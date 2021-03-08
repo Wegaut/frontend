@@ -10,7 +10,12 @@ const routes: Routes = [
   {
     path: 'modal-follow-users',
     loadChildren: () => import('./modal-follow-users/modal-follow-users.module').then( m => m.ModalFollowUsersPageModule)
+  },
+  {
+    path: 'modal-home-detail/:id',
+    loadChildren: () => import('./modal-home-detail/modal-home-detail.module').then( m => m.ModalHomeDetailPageModule)
   }
+
 ];
 
 @NgModule({

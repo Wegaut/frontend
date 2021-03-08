@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>modal-events-detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  
+<ion-grid fixed>
+  <form (ngSubmit)="addGroup(fAddGroup)" #fAddGroup="ngForm">
+    <ion-row>
+        <ion-col>
+            <ion-list>
+              <ion-item class="roundedInput8px margin-bottom-15 ">
+                <ion-label>
+                  <ion-icon color="medium" name="mail-outline"></ion-icon>
+                </ion-label>
+                <ion-input  name="nameChat" 
+                placeholder="Nombre del Grupo"
+                type="text"
+                [(ngModel)]="group.nameChat"
+                required></ion-input>
+              </ion-item>
+  
+  
+              <ion-item class="roundedInput8px margin-bottom-15 ">
+                <ion-label>
+                  <ion-icon color="medium" name="person"></ion-icon>
+                </ion-label>
+                <ion-input name="email"
+                placeholder="Email del Contacto"
+                type="text"
+                [(ngModel)]="group.email"
+                required></ion-input>
+                </ion-item>
+  
+              </ion-list>
+            </ion-col>
+        </ion-row>
+        
+        <ion-row>
+        <ion-col>
+            <ion-button type="submit"
+                        color="primary"
+                        shape="round"
+                        >
+                Crear Grupo
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    
+    </form>
+  </ion-grid>
+  
+  
+  
+      <ion-list>
+        <!-- Refresher -->
+        <ion-item *ngFor="let group of groups" (click)="openChat(chat)">
+          <ion-avatar slot="start">
+          </ion-avatar>
+          <ion-label>
+      
+          </ion-label>
+        </ion-item>
+      
+    </ion-list>
+
+</ion-content>

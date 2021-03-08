@@ -50,14 +50,22 @@
       <ion-col>
             <ion-item>
               <ion-avatar slot="end">
-                <ion-icon name="trash-bin-outline"size="small" (click)="deleteGroup(message._id)" ></ion-icon></ion-avatar>
-              <ion-label>       
-                <span class="badge badge-light ml-2">
-                  Message Date : {{message.updatedAt | amLocale:'es' | amDateFormat:'LL'}}
-                </span>
-                <h2> <strong> {{message.nameChat}}</strong></h2>
-                <p>{{message.messages}}</p>
-              </ion-label>
+                <ion-icon name="trash-bin-outline"size="small" (click)="deleteGroup(message._id)" ></ion-icon>
+              </ion-avatar>
+                <ion-label>      
+
+                <ion-badge color="light" class="ml-2">
+                   <p><strong>Message Date: {{message.updatedAt | amLocale:'es' | amDateFormat:'LL'}}</strong></p>
+                </ion-badge>
+                <br>
+
+                <ion-badge color="primary" class="ml-2">
+                  <p><strong>{{this.identity.name}} {{this.identity.surname}}</strong></p>
+               </ion-badge>
+
+                <h2><strong><a [routerLink]="['/main/tabs/home/modal-home-detail', message._id]">{{message.nameChat}}</a></strong></h2>
+
+               </ion-label>
             </ion-item>
           </ion-col>
     </ion-row>

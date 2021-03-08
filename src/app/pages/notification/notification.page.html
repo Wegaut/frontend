@@ -15,8 +15,9 @@
 
     <ion-buttons slot="end">
       <ion-buttons slot="primary">
-        <ion-button ion-button icon-only (click)="addContact()">
-          <ion-icon  slot="end" name="person-add"></ion-icon>
+        <ion-button ion-button icon-only 
+        [routerLink]="['/main/tabs/notification/modal-notification-detail', this.identity._id]">
+          <ion-icon  slot="end" name="person-add"> </ion-icon> 
         </ion-button>
       </ion-buttons>
 
@@ -40,9 +41,14 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-    <ion-content padding>
-      <ion-card  *ngFor="let contacts of this.user">
+    <ion-content  padding>
+      <br>
+      <br>
+      <ion-card   *ngFor="let contacts of this.user">
         <ion-item>
+          <ion-avatar slot="end">
+            <ion-icon name="trash-bin-outline"size="small" (click)="deleteContact( this.identity._id, this.contacts._id)" ></ion-icon>
+          </ion-avatar> 
           <ion-label>
            
             <span class="badge badge-light ml-2">
@@ -53,45 +59,11 @@
           
             <span class="badge badge-light ml-2">
                <h2> <strong> {{contacts.email}}</strong></h2> </span>
+               
           </ion-label>
         </ion-item>       
       </ion-card>
-
-
-      <ion-grid fixed>
-        <form (ngSubmit)="addContact(fAddContact)" #fAddContact="ngForm">
-          <ion-row>
-              <ion-col>
-                  <ion-list>
-                    <ion-item class="roundedInput8px margin-bottom-15 ">
-                      <ion-label>
-                        <ion-icon color="medium" name="person"></ion-icon>
-                      </ion-label>
-                      <ion-input name="email"
-                      placeholder="Email del Contacto"
-                      type="text"
-                      [(ngModel)]=email
-                      required></ion-input>
-                      </ion-item>
-        
-                    </ion-list>
-                  </ion-col>
-              </ion-row>
-              
-              <ion-row>
-              <ion-col>
-                  <ion-button type="submit"
-                              color="primary"
-                              shape="round"
-                              >
-                      Crear Grupo
-                  </ion-button>
-              </ion-col>
-          </ion-row>
-          
-          </form>
-        </ion-grid>
-        
+      <br>
   </ion-content>
 
   

@@ -3,9 +3,10 @@ import {MessageSchema} from '../models/message';
 export class GroupsSchema{
        
 constructor(
-       public id:string,
+       public _id : string,
        public nameChat:string,
-       public user?:string,
-       public messages?:[MessageSchema],  
+       public user:string,
+       public messageContent:string,
+       public messages:any,  
          ){}
 }

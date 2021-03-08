@@ -9,6 +9,7 @@ import { LoginService } from './login.service';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  providers:[LoginService]
 })
 export class LoginPage implements OnInit {
 
