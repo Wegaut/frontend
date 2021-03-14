@@ -21,7 +21,8 @@ export class NotificationPage implements OnInit {
   public identity 
   public token;
   public status:string;
-  public contacts : ContactSchema
+  public contacts : ContactSchema;
+  public textBuscar="";
  
 
 // VER CURSO 232//
@@ -51,6 +52,11 @@ export class NotificationPage implements OnInit {
       this.ngOnInit();
       event.target.complete();
   }
+
+  buscar(event){
+    //console.log(event);
+    this.textBuscar=event.detail.value;
+  };
 
 
   getContact(){

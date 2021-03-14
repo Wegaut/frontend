@@ -12,11 +12,16 @@ import { HomeService } from '../../home/home.service';
 import { NotificationModel } from 'src/app/models/notification-model';
 import { NotificationService } from '../../notification/notification.service';
 import { ModalFollowersDetailsPage } from '../modal-followers-details/modal-followers-details.page';
+import { LoginService } from '../../login/login.service';
+import { UserSchema } from 'src/app/models/user-model';
+import {global} from '../../../global.service';
+
 
 @Component({
   selector: 'app-modal-details-profile',
   templateUrl: './modal-details-profile.page.html',
   styleUrls: ['./modal-details-profile.page.scss'],
+  providers:[LoginService]
 })
 export class ModalDetailsProfilePage implements OnInit {
   
@@ -34,6 +39,18 @@ export class ModalDetailsProfilePage implements OnInit {
   checkFollowUser;
   userFollow = new UserFollow;
   userFollowedId : string;
+  public user :UserSchema;
+  public identity 
+  public token;
+  public status:string;
+  public name;    
+  public lastname;
+  public updatedAt;
+  public email;
+  public nPhone;
+  public photoProfile;
+  public AfuConfig;
+  public url;
 
 
   @Input() sponsorUserId;
@@ -42,7 +59,14 @@ export class ModalDetailsProfilePage implements OnInit {
                private modalCrtl: ModalController,
                private storage: Storage,
                private homeService: HomeService,
-               private notificationService: NotificationService) { }
+               private notificationService: NotificationService,
+               private loginservice: LoginService)
+                { 
+this.identity=this.loginservice.getIdentity();
+this.token=this.loginservice.getToken();
+this.user= new UserSchema();
+this.url=global.url;
+                }
 
   ngOnInit() {
    /* console.log("sponsor from modal"+this.sponsorUserId);
@@ -51,6 +75,27 @@ export class ModalDetailsProfilePage implements OnInit {
     this.getUserFollowers(this.sponsorUserId);
     this.getUserEventNum(this.sponsorUserId);
     this.checkIfFollowUser();*/
+  }
+
+  
+  putProfile(Pform){
+    console.log("metodo put")
+    var user = this.identity._id;
+    this.profileService.putProfileUser(this.user).subscribe(
+      response=>{
+        if(!response.user){
+          this.status="error";
+      
+        }else{
+          this.status="success";
+          localStorage.setItem('idenity',JSON.stringify(this.user));
+        }
+      },
+      error => {
+         this.status="error";
+        console.log(error)
+      }
+    )
   }
 /*
   getUserProfileInfo(userId){

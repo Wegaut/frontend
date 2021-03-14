@@ -1,12 +1,43 @@
-.msg {
-  border-radius: 10px;
+
+body{
+    background: #fc00ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #00dbde, #fc00ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #00dbde, #fc00ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
 }
 
-.msg.right {
-  background-color:#CCC;
+
+/*ion-list{
+  font-family: Helvetica;
+  font-size: 18px;
+  font-weight: 50%;
+  background: rgba(190, 187, 187, 0.227);
+  overflow: hidden;
+  border-radius: 50px;
+}
+*/
+p.comment-left{
+  overflow: hidden;
+  margin-left:400px;
 }
 
-.msg.left {
-  background-color:#555;
-  color: white;
+ion-list.comment-left{
+  overflow: hidden;
+  margin-left:400px; 
 }
+
+ion-badge.comment-left {
+  overflow: hidden;
+  margin-left:400px;
+}
+
+ion-avatar.left{
+  overflow: hidden;
+  margin-left:400px;
+}
+
+small.left{
+  overflow: hidden;
+  margin-left:400px;   
+}
+

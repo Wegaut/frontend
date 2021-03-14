@@ -68,6 +68,8 @@ this.token=this.loginservice.getToken();
     //console.log(event);
     this.textSearch=event.detail.value;
   };
+
+  
   
   getGroupUser(){
     var userId = this.identity._id;
@@ -142,7 +144,9 @@ this.token=this.loginservice.getToken();
         this.eventService.deleteGroup(id,this.token).subscribe(
           response=>{
             console.log(response);
+            this._router.navigate(['/main/tabs/home']);
             this.getGroupUser();
+
           },
           error=>{
             console.log(error);

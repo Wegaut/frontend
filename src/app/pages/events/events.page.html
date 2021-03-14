@@ -1,8 +1,11 @@
  <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title slot="start" class="main-header4" color="secondary">TeamSpaces</ion-title>
+    <ion-title slot="start" class="main-header4" color="danger">TeamSpaces</ion-title>
     <ion-buttons slot="primary">
-      <ion-button color="secondary"
+      <ion-button>
+        <img src="../../assets/b2blogo.png"  style="width: 50px;height: 25px;"/>
+      </ion-button>
+      <ion-button color="danger"
         [routerLink]="['/main/tabs/events/modal-events-detail']">
         <ion-icon slot="icon-only" name="create"></ion-icon>
       </ion-button>
@@ -17,7 +20,7 @@
   <ion-grid fixed class="ion-no-padding">
     <ion-row>
       <ion-col>
-        <ion-searchbar color="" animated placeholder="Find group" search-icon="search-outline"  debounce="2" (ionChange)="buscar($event)" >
+        <ion-searchbar color="danger" animated placeholder="Find group" search-icon="search-outline"  debounce="2" (ionChange)="buscar($event)" >
         </ion-searchbar>
       </ion-col>
     </ion-row>  
@@ -25,27 +28,32 @@
 </ion-toolbar>
 
 
-<ion-card  *ngFor="let group of this.groups | filtro: textBuscar">
-  <ion-item>
+<ion-list>
+  <ion-item *ngFor="let group of this.groups | filtro: textBuscar" [routerLink]="['/main/tabs/events/modal-chat-events', group._id]">
+  
+    <ion-avatar slot="end">
+      <ion-icon name="trash-bin-outline"size="small" color="danger" (click)="deleteGroup(group._id)"></ion-icon>
+    </ion-avatar>
+  
     <ion-label>
-      <h2>Grupos</h2>
-      <span class="badge badge-light ml-2">
+
+      <ion-badge color="light" class="ml-2">
         {{group.updatedAt | amLocale:'es' | amDateFormat:'LL'}}
+      </ion-badge>
+
+      <h2> <b><!--a [routerLink]="['/main/tabs/events/modal-chat-events', group._id]"-->{{group.nameChat}}<!--/a--></b></h2>
+      
+      <span class="badge badge-danger ml-2">
+        Contacto: {{group.user.email}}
       </span>
-      <h2> <strong> {{group.nameChat }}</strong></h2>
-      <span class="badge badge-primary ml-2">
-        {{group.user.email}}
-      </span>
+
+      <p>acceder dando click</p>
+
     </ion-label>
   </ion-item>
-  <ion-row>
-    <ion-col></ion-col>
-    <ion-col>
-
-    </ion-col>
-  </ion-row>
+</ion-list>
+</ion-content>
  
-</ion-card> 
 
 
 <!--ion-grid class="ion-no-padding">
@@ -67,15 +75,15 @@
 
    
 
-          <!-- Infinite Scroll -->
+          <!-- Infinite Scroll 
           <ion-infinite-scroll
           threshold="150px"
           (ionInfinite)="nextEvents($event)">
         <ion-infinite-scroll-content>
         </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+        </ion-infinite-scroll-->
 
-</ion-content>
+
 
 
 

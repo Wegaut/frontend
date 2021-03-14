@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
+import {AlertController} from '@ionic/angular';
 import { EventDetails } from 'src/app/interfaces/event';
 import { EventAddModal } from 'src/app/models/event-model';
 import { EventLike } from 'src/app/models/schedule-user-event-models';
@@ -8,6 +9,7 @@ import { ModalDetailsEventPage } from './modal-details-event/modal-details-event
 import { ModalNewEventPage } from './modal-new-event/modal-new-event.page';
 import { ModalScheduleEventPage } from './modal-schedule-event/modal-schedule-event.page';
 import { Storage } from '@ionic/storage';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 
 import {GroupsSchema} from '../../models/group';
@@ -39,7 +41,11 @@ export class EventsPage implements OnInit {
   //private modalCrtl: ModalController,
   //private elementRef: ElementRef,
   //private storage: Storage,
-  private navCtrl: NavController) {
+  private navCtrl: NavController,
+    private alertController : AlertController,
+  private _router :Router,
+  private _route :ActivatedRoute
+  ) {
 
 this.identity=this.loginservice.getIdentity();
 this.token=this.loginservice.getToken();
@@ -74,6 +80,8 @@ this.group = new GroupsSchema("","","","","")
       }
     )
   }
+
+  
   buscar(event){
     //console.log(event);
     this.textBuscar=event.detail.value;
@@ -85,7 +93,7 @@ this.group = new GroupsSchema("","","","","")
        response=>{
          console.log(response);
          if(response.groups){
-           this.groups   = response;
+           this.groups   = response.groups;
            console.log(this.groups);
            console.log("this getGroupSearch");
          }
@@ -95,6 +103,40 @@ this.group = new GroupsSchema("","","","","")
        }
      )
    }
+
+   
+   async deleteGroup(id){
+    const alertElement=  await this.alertController.create({
+      header:'Are your sure, you want to delete it?',
+      message:'This information will be permanently deleted from the database',
+      buttons:[{
+        text:'Cancel',
+        role:'cancel'
+      }, 
+      {
+      text:'Delete',
+      handler: () =>{
+        this.eventService.deleteGroup(id,this.token).subscribe(
+          response=>{
+            console.log(response);
+            this._router.navigate(['/main/tabs/events']);
+            this.getGroupAll();
+
+          },
+          error=>{
+            console.log(error);
+          }
+        )
+      
+       // this.router.navigate(['/bills']);
+          } 
+        }
+      ]
+    });
+    await alertElement.present();
+  
+
+}
 
 
   /*recharge(event){

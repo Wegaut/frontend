@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
 import {LoginService } from '../../login/login.service';
 import {HomeService } from '../../home/home.service';
 import {EventsService } from '../../events/events.service';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {GroupsSchema} from '../../../models/group';
 import { UserSchema } from 'src/app/models/user-model';
 import { MessageSchema } from 'src/app/models/message';
 import {global} from '../../../global.service';
 
-
-
 @Component({
-  selector: 'app-modal-home-detail',
-  templateUrl: './modal-home-detail.page.html',
-  styleUrls: ['./modal-home-detail.page.scss'],
+  selector: 'app-modal-chat-events',
+  templateUrl: './modal-chat-events.page.html',
+  styleUrls: ['./modal-chat-events.page.scss'],
   providers:[ LoginService, HomeService, EventsService ]
 })
+export class ModalChatEventsPage implements OnInit {
 
-export class ModalHomeDetailPage implements OnInit {
-
-
+  
   public identity;
   public token;
   public status;
@@ -51,7 +48,8 @@ export class ModalHomeDetailPage implements OnInit {
     console.log("metodo identity");
   }
 
- getGroup(){
+
+  getGroup(){
     this._route.params.subscribe(params =>{
       let id = params['id'];
 
@@ -59,9 +57,10 @@ export class ModalHomeDetailPage implements OnInit {
         response =>{
           if(response.group){
             this.group=response.group; 
-            console.log(response.group.user._id);
-            console.log("metodo id");
+            console.log(response.group.user.name);
             console.log(response.group.user.photoProfile);
+            console.log(response.group.user._id);
+            console.log("metodo id");          
             
            // for ( const messageDetails in this.group.messages) { console.log(messageDetails)}; 
           /*
@@ -74,7 +73,7 @@ export class ModalHomeDetailPage implements OnInit {
           });
 */
           }else{
-            this._router.navigate(['/main/tabs/home']);
+            this._router.navigate(['/main/tabs/events']);
           }
         },
         error =>{
@@ -86,31 +85,27 @@ export class ModalHomeDetailPage implements OnInit {
 
 
 addMesssage(form){
- this.homeService.addMessage(this.token, this.message, this.group._id).subscribe(
-   response=>{
-     console.log(this.token);
-     console.log(this.message);
-     console.log(this.group._id);
-    if(!response.group){;
-      this.status='error'
-      console.log(response.group);
-    }else {
-      this.status ="success";
-      this.group = response.group;
-      form.reset();
-      console.log(this.group.messages);
+  this.homeService.addMessage(this.token, this.message, this.group._id).subscribe(
+    response=>{
+      console.log(this.token);
+      console.log(this.message);
+      console.log(this.group._id);
+     if(!response.group){;
+       this.status='error'
+       console.log(response.group);
+     }else {
+       this.status ="success";
+       this.group = response.group;
+       form.reset();
+       console.log(this.group.messages);
+     }
+    },
+    error =>{
+      this.status ='error';
+     console.log(error);
     }
-   },
-   error =>{
-     this.status ='error';
-    console.log(error);
-   }
- );
-}
+  );
+ }
+ 
 
-
-/*const foundIndex = this.ordersList.findIndex(({ orderNumber }) => orderNumber === orderSelected.orderNumber);
-    this.ordersList = this.ordersList.filter((_, index) => index !== foundIndex);
-    console.log(this.ordersList);
-*/
 }

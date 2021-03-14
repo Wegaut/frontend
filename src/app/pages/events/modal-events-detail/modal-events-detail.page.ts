@@ -55,8 +55,9 @@ this.group = new GroupsSchema("","","","","")
         console.log(response);
         if(response.group){
           this.status="success";
+          this._router.navigate(['/main/tabs/events']);
           this.group=response.group;
-          this._router.navigate(['main/tabs/events']);
+          this._router.navigate(['/main/tabs/events']);
         }else{
           this.status="error";
         }

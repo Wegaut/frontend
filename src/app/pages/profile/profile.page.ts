@@ -6,6 +6,7 @@ import { NotificationService } from '../notification/notification.service';
 import { LoginService } from '../login/login.service';
 import { UserSchema } from 'src/app/models/user-model';
 import {global} from '../../global.service';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 
 
@@ -39,7 +40,10 @@ export class ProfilePage implements OnInit {
                private navCtrl: NavController,
                private modalCrtl: ModalController,
                private notificationService: NotificationService,*/
-               private loginservice: LoginService) 
+               private loginservice: LoginService,
+               private _router :Router,
+               private _route :ActivatedRoute
+               ) 
                {
 
 this.identity=this.loginservice.getIdentity();
@@ -78,7 +82,6 @@ this.url=global.url;
 
 
   putProfile(Pform){
-    console.log("metodo put")
     var user = this.identity._id;
     this.profileService.putProfileUser(this.user).subscribe(
       response=>{
@@ -88,6 +91,7 @@ this.url=global.url;
         }else{
           this.status="success";
           localStorage.setItem('idenity',JSON.stringify(this.user));
+          this._router.navigate(['/main/tabs/profile']);
         }
       },
       error => {

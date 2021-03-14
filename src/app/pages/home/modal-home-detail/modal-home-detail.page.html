@@ -1,88 +1,84 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title  class="mt-3 col-lg-12 ml-5" *ngIf="group"> {{group.nameChat}} </ion-title>
+    
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/home"></ion-back-button>
+    </ion-buttons>
+   
+    <ion-title  class="mt-3 col-lg-12 ml-5" *ngIf="group"> <h1> {{group.nameChat}} </h1></ion-title>
   </ion-toolbar>
 </ion-header>
+
+
 
 <ion-content> 
   <ion-row >
   <ion-col>
         <ion-item>
-          <ion-avatar slot="end">
-            <ion-icon name="trash-bin-outline"size="small" (click)="deleteGroup(message._id)" ></ion-icon>
-          </ion-avatar>
             <ion-label>      
 
             <ion-badge color="light" class="ml-2">
-               <p><strong>Message Date: {{message.updatedAt | amLocale:'es' | amDateFormat:'LL'}}</strong></p>
+               <p><strong>Message Date: {{message.createdAt | amLocale:'es' | amDateFormat:'LL'}}</strong></p>
             </ion-badge>
             <br>
 
-            <ion-badge color="tertiary" class="ml-2">
+            <!--ion-badge color="light" class="ml-2">
               <p><strong>{{this.identity.name + ' ' + this.identity.lastname}}</strong></p>
-           </ion-badge>
+           </ion-badge-->
 
            </ion-label>
         </ion-item>
       </ion-col>
 </ion-row>
 
-<ion-row >
-<ion-col class="d-flex flex-column">
-  <ion-list class="justify-content-end" *ngFor="let message of this.group.messages">
-    <p class="col-6 msg right comment-item">{{message.messageContent}}
-  
-    </p>
-  </ion-list>
-</ion-col>
-</ion-row>
 
-<ion-grid fixed>
-  <form  #HAddMessage="ngForm" (ngSubmit)="addMesssage(HAddMessage)" >
-    <ion-row>
-        <ion-col>
-            <ion-list>
-              <ion-item class="roundedInput8px margin-bottom-15 ">
-                <ion-label>
-                  <ion-icon color="medium" name="mail-outline"></ion-icon>
-                </ion-label>
-                <ion-textarea
-                 name="messageContent" 
-                placeholder="Escribir mensaje"
-                type="text"
-                #messages.messageContent="ngModel"
-                [(ngModel)]="message.messageContent"
-                required></ion-textarea>
-              </ion-item>
+<ion-list class="justify-content-end" *ngFor="let message of this.group.messages">
+
+  <small class="left"*ngIf="this.identity._id != message.user._id">
+    {{message.createdAt | amLocale:'es' | amDateFormat:'LL'}}</small>
+
+  <ion-avatar class="mr-4 float-left left"  *ngIf="this.identity._id != message.user._id">
+  <img src="{{url+'photoProfile/'+message.user.photoProfile}}"  class="avatar_nav"/> 
+  </ion-avatar>
+
+  <ion-badge color="success" class="col-6 comment-left" *ngIf="this.identity._id != message.user._id">
+    <small class="col-6 msg comment-item">{{message.user.name}} {{message.user.lastname}}</small> 
+    </ion-badge>
+
+  <p class="col-6 comment-left" *ngIf="this.identity._id != message.user._id"><strong>{{message.messageContent}}</strong></p>
 
 
-              <ion-item class="roundedInput8px margin-bottom-15 ">
-                <ion-label>
-                  <ion-icon color="medium" name="person"></ion-icon>
-                </ion-label>
-                <ion-input name="idStatusMessage"
-                default="false"
-                type="text"
-                #message.idStatusMessage="ngModel"
-                [(ngModel)]="message.idStatusMessage"
-                required></ion-input>
-                </ion-item>
+<small *ngIf="this.identity._id == message.user._id">
+{{message.createdAt | amLocale:'es' | amDateFormat:'LL'}}</small>
 
-              </ion-list>
-            <ion-button type="submit"
-                        color="primary"
-                        shape="round"
-                        >
-                Enviar
-            </ion-button>
-        </ion-col>
-    </ion-row>
-    
-    </form>
-  </ion-grid>
+<ion-avatar class="mr-4 float-left" *ngIf="message.user.photoProfile && this.identity._id == message.user._id ">
+<img src="{{url+'photoProfile/'+message.user.photoProfile}}"  class="avatar_nav"/> 
+</ion-avatar>
+
+<ion-badge color="primary"  *ngIf="this.identity._id == message.user._id">
+<small class="col-6 msg comment-item">{{message.user.name}} {{message.user.lastname}} </small> 
+</ion-badge>
+
+<p class="col-6 comment-rigth" *ngIf="this.identity._id == message.user._id"><strong>{{message.messageContent}}</strong></p>
+<hr>
+</ion-list>
 
 
+  <ion-footer padding>
+    <form  #HAddMessage="ngForm" (ngSubmit)="addMesssage(HAddMessage)" >
+    <ion-item>
+      <ion-textarea
+      name="messageContent" 
+      placeholder="   Escribir mensaje"
+      type="text"
+      #messages.messageContent="ngModel" 
+      [(ngModel)]="message.messageContent"
+      (keyup.enter)="addMesssage(HAddMessage)"
+      required></ion-textarea>
+      <ion-button type="submit" color="success" expand="block" class="padding"> Enviar</ion-button>
+    </ion-item>
 
- 
+  </form>
+  </ion-footer>
 </ion-content>
  

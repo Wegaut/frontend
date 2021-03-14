@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { ModalController, NavController } from '@ionic/angular';
 import { ContactSchema } from 'src/app/models/contact';
 import { UserSchema } from 'src/app/models/user-model';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 
 @Component({
@@ -31,7 +32,9 @@ export class ModalNotificationDetailPage implements OnInit {
     private storage: Storage,
     private navCtrl: NavController,
     private modalCrtl: ModalController,
-    private loginservice:LoginService
+    private loginservice:LoginService,
+    private _router :Router,
+    private _route :ActivatedRoute
     ) { 
 
       this.identity=this.loginservice.getIdentity();
@@ -52,6 +55,7 @@ export class ModalNotificationDetailPage implements OnInit {
         if(response.contacts){
           this.status="success";
           this.contacts = response.contacts;
+          this._router.navigate(['/main/tabs/notification']);
         }else{
           this.status="error";
         }

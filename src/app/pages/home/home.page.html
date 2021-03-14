@@ -15,10 +15,10 @@
   <ion-toolbar color="blank">
     <ion-buttons slot="end">
       <ion-button>
-        <img src="../../assets/b2blogo.png"  style="width: 50px;height: 25px;"/>
+        <img src="../../assets/b2blogo.png"  style="width: 50px;height: 25px;">
       </ion-button>
     </ion-buttons>
-    <ion-title class="main-header4">Chats</ion-title>
+    <ion-title class="main-header4" color="danger">Chats</ion-title>
     <!-- <ion-buttons slot="end">
       <ion-button class="badge-button" routerLink="/fire-signin" routerDirection="forward">
         <ion-icon name="person-circle-outline" color="light">
@@ -31,7 +31,7 @@
     <ion-grid fixed class="ion-no-padding">
       <ion-row>
         <ion-col>
-          <ion-searchbar color="" placeholder="Find chat" (ionChange)="search($event)" search-icon="search-outline">
+          <ion-searchbar color="danger" placeholder="Find chat" (ionChange)="search($event)" search-icon="search-outline">
           </ion-searchbar>
         </ion-col>
       </ion-row>  
@@ -40,35 +40,31 @@
 </ion-header>
 
 
-
 <ion-content>
-  <!--ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher-->
 
-    <ion-row *ngFor="let message of groups | filtro: textSearch">
-      <ion-col>
-            <ion-item>
-              <ion-avatar slot="end">
-                <ion-icon name="trash-bin-outline"size="small" (click)="deleteGroup(message._id)" ></ion-icon>
-              </ion-avatar>
-                <ion-label>      
+  
+    <ion-list>
+    
+      <ion-item *ngFor="let message of this.groups | filtro: textSearch" [routerLink]="['/main/tabs/home/modal-home-detail', message._id]">
+        <!--ion-avatar slot="start">
+          <ion-img [src]="chat.img"></ion-img>
+        </ion-avatar-->
+        <ion-avatar slot="end">
+          <ion-icon name="trash-bin-outline"size="small" color="danger" (click)="deleteGroup(message._id)" ></ion-icon>
+        </ion-avatar>
+       
+        <ion-label>
+          <ion-badge color="light" class="ml-2">
+            <p><strong>Message Date: {{message.updatedAt | amLocale:'es' | amDateFormat:'LL'}}</strong></p>
+         </ion-badge>
 
-                <ion-badge color="light" class="ml-2">
-                   <p><strong>Message Date: {{message.updatedAt | amLocale:'es' | amDateFormat:'LL'}}</strong></p>
-                </ion-badge>
-                <br>
-
-                <ion-badge color="primary" class="ml-2">
-                  <p><strong>{{this.identity.name}} {{this.identity.surname}}</strong></p>
-               </ion-badge>
-
-                <h2><strong><a [routerLink]="['/main/tabs/home/modal-home-detail', message._id]">{{message.nameChat}}</a></strong></h2>
-
-               </ion-label>
-            </ion-item>
-          </ion-col>
-    </ion-row>
+          <h2> <b><a [routerLink]="['/main/tabs/home/modal-home-detail', message._id]">{{message.nameChat}}</a></b></h2>
+         
+          <p>acceder dando click</p>
+        </ion-label>
+      </ion-item>
+    
+  </ion-list>
 </ion-content>
 
     

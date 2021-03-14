@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>modal-chat-home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+</ion-content>
+  <ion-list class="app-mensajes" id="app-mensajes">
+    <ion-list class="text-left">
+      <ion-badge class="text-left" color="primary" class="ml-2">Fernando</ion-badge>
+      <p> Esto es otro mensaje</p>
+    </ion-list>  
+
+        <ion-badge color="success" class="ml-2">Maria</ion-badge>
+      <p> Esto es otro mensajeh</p> 
+  
+
+  <ion-footer padding>
+    <form>
+    <ion-item>
+      <ion-textarea
+      type="text" 
+      name="mensaje" 
+      [(ngModel)]="mensaje"
+      class="form-control"
+      (keyup.enter)="enviar_mensaje()"
+      placeholder="Escribir mensaje"
+      required></ion-textarea>
+      <ion-button type="submit" color="success" expand="block" class="padding"> Enviar</ion-button>
+    </ion-item>
+  </form>
+  </ion-footer>
+

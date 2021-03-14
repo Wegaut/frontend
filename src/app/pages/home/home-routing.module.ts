@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'modal-home-detail/:id',
     loadChildren: () => import('./modal-home-detail/modal-home-detail.module').then( m => m.ModalHomeDetailPageModule)
+  },  {
+    path: 'modal-chat-home',
+    loadChildren: () => import('./modal-chat-home/modal-chat-home.module').then( m => m.ModalChatHomePageModule)
   }
+
 
 ];
 

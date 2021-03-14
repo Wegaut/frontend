@@ -9,6 +9,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { HomePageRoutingModule } from './home-routing.module';
 
 
+
 @NgModule({
   imports: [
     CommonModule,

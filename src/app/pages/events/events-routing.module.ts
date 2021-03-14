@@ -31,7 +31,12 @@ const routes: Routes = [
   {
     path: 'modal-events-detail',
     loadChildren: () => import('./modal-events-detail/modal-events-detail.module').then( m => m.ModalEventsDetailPageModule)
+  },
+  {
+    path: 'modal-chat-events/:id',
+    loadChildren: () => import('./modal-chat-events/modal-chat-events.module').then( m => m.ModalChatEventsPageModule)
   }
+
 
 ];
 
