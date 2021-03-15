@@ -55,9 +55,11 @@ this.group = new GroupsSchema("","","","","")
         console.log(response);
         if(response.group){
           this.status="success";
-          this._router.navigate(['/main/tabs/events']);
+          console.log("redireccion al login")
+          this._router.navigate(['/login']);
           this.group=response.group;
-          this._router.navigate(['/main/tabs/events']);
+          console.log("redireccion al events")
+          this._router.navigate(['/main/tabs/events'])
         }else{
           this.status="error";
         }

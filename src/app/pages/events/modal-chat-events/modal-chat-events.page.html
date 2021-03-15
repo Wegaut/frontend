@@ -35,7 +35,7 @@
 <ion-list class="justify-content-end" *ngFor="let message of this.group.messages">
 
           <small class="left"*ngIf="this.identity._id != message.user._id">
-            {{message.createdAt | amLocale:'es' | amDateFormat:'LL'}}</small>
+            {{message.createdAt| amLocale:'en' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</small>
 
           <ion-avatar class="mr-4 float-left left"  *ngIf="this.identity._id != message.user._id">
           <img src="{{url+'photoProfile/'+message.user.photoProfile}}"  class="avatar_nav"/> 
@@ -49,7 +49,7 @@
 
 
     <small *ngIf="this.identity._id == message.user._id">
-    {{message.createdAt | amLocale:'es' | amDateFormat:'LL'}}</small>
+    {{message.createdAt | amLocale:'en' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</small>
   
   <ion-avatar class="mr-4 float-left" *ngIf="message.user.photoProfile && this.identity._id == message.user._id ">
     <img src="{{url+'photoProfile/'+message.user.photoProfile}}"  class="avatar_nav"/> 

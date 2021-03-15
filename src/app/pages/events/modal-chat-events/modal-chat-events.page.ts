@@ -44,8 +44,6 @@ export class ModalChatEventsPage implements OnInit {
   }
   ngOnInit() {
     this.getGroup();
-    console.log(this.identity._id);
-    console.log("metodo identity");
   }
 
 
@@ -57,10 +55,7 @@ export class ModalChatEventsPage implements OnInit {
         response =>{
           if(response.group){
             this.group=response.group; 
-            console.log(response.group.user.name);
-            console.log(response.group.user.photoProfile);
-            console.log(response.group.user._id);
-            console.log("metodo id");          
+         
             
            // for ( const messageDetails in this.group.messages) { console.log(messageDetails)}; 
           /*
@@ -97,6 +92,8 @@ addMesssage(form){
        this.status ="success";
        this.group = response.group;
        form.reset();
+       this.getGroup();
+
        console.log(this.group.messages);
      }
     },
